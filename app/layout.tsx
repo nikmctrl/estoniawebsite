@@ -1,18 +1,14 @@
 import {NextIntlClientProvider} from 'next-intl';
 import {getLocale} from 'next-intl/server';
+import './globals.css';
+
+import {defineRouting} from 'next-intl/routing';
  
-export default async function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
-  const locale = await getLocale();
+export const routing = defineRouting({
+  // A list of all locales that are supported
+  locales: ['en', 'de'],
  
-  return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
-      </body>
-    </html>
-  );
-}
+  // Used when no locale matches
+  defaultLocale: 'en',
+  localePrefix: 'as-needed'
+});
